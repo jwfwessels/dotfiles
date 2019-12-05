@@ -1,216 +1,89 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+# show all hidden folders
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+SHOWALLFILES=`defaults read com.apple.finder AppleShowAllFiles`
+if [[ $SHOWALLFILES != 1 ]]; 
+then
+	defaults write com.apple.finder AppleShowAllFiles -boolean true
+	echo "Set show hidden files true, please restart Finder."
+fi
+
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# add homebrew's sbin to path	
+ export PATH="/usr/local/sbin:$PATH"
+
+# Path to your oh-my-zsh installation.
+export ZSH=/Users/jwwessels/.oh-my-zsh
+
+# Set name of the theme to load. Optionally, if you set this to "random"
+# it'll load a random theme each time that oh-my-zsh is loaded.
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
+ZSH_THEME="spaceship"
 
-# Set to this to use case-sensitive completion
+# Set list of themes to load
+# Setting this variable when ZSH_THEME=random
+# cause zsh load theme from this variable instead of
+# looking in ~/.oh-my-zsh/themes/
+# An empty array have no effect
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
+
+# Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
-# Uncomment this to disable bi-weekly auto-update checks
+# Uncomment the following line to use hyphen-insensitive completion. Case
+# sensitive completion must be off. _ and - will be interchangeable.
+# HYPHEN_INSENSITIVE="true"
+
+# Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 
-# Uncomment to change how often before auto-updates occur? (in days)
-export UPDATE_ZSH_DAYS=13
+# Uncomment the following line to change how often to auto-update (in days).
+# export UPDATE_ZSH_DAYS=13
 
-# Uncomment following line if you want to disable colors in ls
+# Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
 
-# Uncomment following line if you want to disable autosetting terminal title.
+# Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
 
-# Uncomment following line if you want red dots to be displayed while waiting for completion
- COMPLETION_WAITING_DOTS="true"
+# Uncomment the following line to display red dots whilst waiting for completion.
+# COMPLETION_WAITING_DOTS="true"
 
-# Uncomment following line if you want to disable marking untracked files under
-# VCS as dirty. This makes repository status check for large repositories much,
-# much faster.
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
 # DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-# Uncomment following line if you want to  shown in the command execution time stamp
-# in the history command output. The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|
-# yyyy-mm-dd
-HIST_STAMPS="dd.mm.yyyy"
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-# I'm considering extracting the aliases I actually use... and leaving the rest.
-plugins=(git brew npm bundler postgres history-substring-search)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+  zsh-nvm
+  brew
+  npm
+  git
+  yarn-autocompletions
+)
 
 source $ZSH/oh-my-zsh.sh
-
-#############################################
-### User configuration
-
-export PATH="/usr/local/share/npm/bin":$PATH
-export PATH="/usr/texbin":$PATH
-export PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin":$PATH
-export PATH="$HOME/.rbenv/bin":$PATH
-export PATH="$HOME/.rbenv/shims":$PATH
-#export PATH="$HOME/.pyenv/bin":$PATH
-#export PATH="$HOME/.pyenv/shims":$PATH
-export PATH="$HOME/.goenv/bin":$PATH
-#export PATH="$HOME/.goenv/shims":$PATH
-export PATH="/usr/local/heroku/bin":$PATH
-export PATH="/usr/local/narwhal/bin":$PATH
-export MANPATH="/usr/local/man:$MANPATH"
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
-else
-  export EDITOR='vim' # export EDITOR='mvim'
-fi
-
-# Preferred key bindings (vi instead of emacs)
-bindkey -v
-# Kill the lag
-export KEYTIMEOUT=1
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# rbenv and pyenv
-eval "$(rbenv init -)"
-#eval "$(pyenv init -)"
-eval "$(goenv init -)"
-
-
-######################################
-### ALIASES
-
-# be nice to windows users
-alias dir='ls'
-alias c='clear'
-alias cls='clear'
-# personal aliases
-alias md='mkdir -p'
-alias rd='rmdir'
-alias l='ls -la'
-alias la='ls -al'
-alias ll='ls -l'
-alias ls='ls -CFG'
-alias lsa='ls -lah'
-alias pls='sudo'
-alias please='sudo'
-alias touche='touch'
-
-# dev aliases
-alias b='bundle'
-alias z='zeus'
-alias zr='zeus rake'
-alias zs='zeus server'
-alias zc='zeus console'
-alias zd='zeus dbconsole'
-alias gblame='git blame'
-alias gg='git add -A .; git commit -m'
-alias rk='bundle exec rake'
-
-# tmux aliases
-alias ta='tmux attach -t'
-alias ts='tmux new-session -s'
-alias tl='tmux list-sessions'
-alias tm='tmux show-messages'
-
-# db aliases
-alias pgstart='brew services start postgres'
-alias pgstop='brew services stop postgres'
-alias pgrestart='brew services restart postgres'
-alias msstart='brew services start mysql'
-alias msstop='brew services stop mysql'
-alias msrestart='brew services restart mysql'
-
-# project aliases
-ereadz_domain='mogulview.com'
-ssh_client='ssh'
-user_name='simon'
-ip_partial='176.9.70'
-alias production="$ssh_client $user_name@mds.$ereadz_domain"
-alias staging="$ssh_client $user_name@staging.$ereadz_domain"
-alias development="$ssh_client $user_name@development.$ereadz_domain"
-alias upgrade="$ssh_client $user_name@$ip_partial.209"
-
-alias productionip="$ssh_client $user_name@$ip_partial.210"
-alias stagingip="$ssh_client $user_name@$ip_partial.210"
-alias developmentip="$ssh_client $user_name@$ip_partial.209"
-
-# command aggregation aliases
-alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
-# .*rc file changes
-alias zrc="vim ~/.zshrc"
-alias vrc="vim ~/.vimrc"
-alias trc="vim ~/.tmux.conf"
-
-
-######################################
-### Custom Shell Features
-
-# jump to gems directory of current ruby version
-gemsdir(){
-  RBV="$(rbenv version-name)"
-  echo "~/.rbenv/versions/$RBV/lib/ruby/gems/$RBV/gems"
-}
-alias gems=$(gemsdir)
-
-# create pull request into specified branch (develop if none specified)
-function gpr {
-  echo Opening pull request for $(current_branch)
-  repo=`git remote -v | head -1 | sed "s/git@github.com://" | cut -c8-999 | sed "s/\.git .*//"`
-  branch=""
-  if [ $1 ]; then
-    branch="$1...$(current_branch)"
-  else
-    branch=$(current_branch)
-  fi
-
-  open "https://github.com/$repo/compare/$branch?expand=1"
-}
-
-# list pull requests for repo
-function gprl {
-  repo=`git remote -v | head -1 | sed "s/git@github.com://" | cut -c8-999 | sed "s/\.git .*//"`
-  echo Opening list of pull requests for $repo
-  open "https://github.com/$repo/pulls"
-}
-
-######################################
-### ENVIRONMENT
-
-# rails devise default user for railsapps composer
-export ADMIN_NAME="Admin Guy"
-export ADMIN_EMAIL="admin@example.com"
-export ADMIN_PASSWORD="password123"
-
-# env variables
-export NODE_PATH=/usr/local/lib/node
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-export GOPATH="$HOME/.goenv/bin"
-export NARWHAL_ENGINE=jsc
-export CAPP_BUILD=$HOME/.cappbuild
-export SSL_CERT_FILE=/usr/local/opt/curl-ca-bundle/share/ca-bundle.crt
-
-############.zshrc jwf 17.10.2015
 
 # User configuration
 
-#export java_home
-export JAVA_HOME="/usr/libexec/java_home"
-
-export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
-
-source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -226,7 +99,7 @@ source $ZSH/oh-my-zsh.sh
 # export ARCHFLAGS="-arch x86_64"
 
 # ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
+# export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -237,4 +110,90 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-$( echo $(which vv)-completions)
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# start postgresql server
+alias dbup="postgres -D /usr/local/var/postgres"
+alias dbupx="postgres -D /usr/local/var/postgresql@9.6"
+alias dbup2="pg_ctl -D /usr/local/var/postgresql@9.6 start"
+
+# command to download all the video urls in a list.txt file
+alias dl-course='youtube-dl -a list.txt -o "%(autonumber)s-%(title)s.%(ext)s"'
+# build the list.txt file from the website:
+# eggheads, on player page using js:
+# x = document.querySelectorAll('.up-next-list-item')
+
+#x = document.querySelectorAll("ul.scroller li a")
+#y = [...x].map((node) => node.href)
+#console.log(y.join('\n'))
+
+alias activate="source ve/bin/activate"
+
+# exports for React Native tools to build native android code
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+alias avd="/Users/jwfwessels/Library/Android/sdk/tools/emulator -avd Nexus_5X_API_23 -netdelay none -netspeed full"
+
+# alias ngrok="source ~/ngrok"
+
+# setHost() {
+#     #$1 name of hostfile to use
+#     if [[ ~/host-backups/$1 ]]
+#     then
+#         sudo cp ~/host-backups/$1 /etc/hosts
+#     else
+#         echo "set to host file, $1 doesnt exist yet"
+#         ls ~/host-backups
+#     fi
+# }
+
+# #$1 is string to append to host file, $2 is name of new hostfile
+# createHost() {
+#     if [[ $1 && $2 ]]
+#     then
+#         cp ~/host-backups/hosts ~/host-backups/$2
+#         echo $1 >> ~/host-backups/$2
+#         sudo cp ~/host-backups/$2 /etc/hosts
+#     else
+#         echo "\$1 is string to append to host file, \$2 is name of new hostfile"
+#     fi
+# }
+
+# alias mysethost=setHost
+# alias mycreatehost=createHost
+
+
+# alias to love
+alias love="/Applications/love.app/Contents/MacOS/love"
+
+# git config --global core.exludesfile ~/.gitignore
+export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
+
+setBetterBT() {
+    defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Max (editable)" 80
+    defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" 80
+    defaults write com.apple.BluetoothAudioAgent "Apple Initial Bitpool (editable)" 80
+    defaults write com.apple.BluetoothAudioAgent "Apple Initial Bitpool Min (editable)" 80
+    defaults write com.apple.BluetoothAudioAgent "Negotiated Bitpool" 80
+    defaults write com.apple.BluetoothAudioAgent "Negotiated Bitpool Max" 80
+    defaults write com.apple.BluetoothAudioAgent "Negotiated Bitpool Min" 80
+}
+
+unsetBetterBT() {
+    defaults delete com.apple.BluetoothAudioAgent "Apple Bitpool Max (editable)"
+    defaults delete com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)"
+    defaults delete com.apple.BluetoothAudioAgent "Apple Initial Bitpool (editable)"
+    defaults delete com.apple.BluetoothAudioAgent "Apple Initial Bitpool Min (editable)"
+    defaults delete com.apple.BluetoothAudioAgent "Negotiated Bitpool"
+    defaults delete com.apple.BluetoothAudioAgent "Negotiated Bitpool Max"
+    defaults delete com.apple.BluetoothAudioAgent "Negotiated Bitpool Min"
+}
+
+nukeBTsettings() {
+    sudo rm /Library/Preferences/com.apple.Bluetooth.plist
+}
+
