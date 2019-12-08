@@ -26,6 +26,7 @@ cask "spectacle"
 
 # install brew forumlas
 brew "git-flow"
+brew "git"
 brew "watchman"
 brew "wget"
 brew "yarn"

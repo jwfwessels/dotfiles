@@ -35,3 +35,6 @@
 [core]
 	editor = vim
 	excludesfile = ~/.gitignore_global
+
+# [crendential]
+# 	helper = osxkeychain

@@ -8,23 +8,27 @@ echo "Setting up your Mac 🛠 🏗"
 echo "Install Apple command line tools..."
 xcode-select --install
 
-
 # Check for Homebrew and install if we don't have it
-[[ $(command -v brew) == "" ]]; then
+if [[ $(command -v brew) == "" ]]; then
     echo "Seems we need some homebrew 🍻"
-    # /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
-
-command -v brew >/dev/null 2>&1 || { echo >&2 "Installing Homebrew Now"; \
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; }
-@pnbrown
-
 
 # Update Homebrew recipes
 brew update
 
 # install brewfile
 brew bundle
+
+# update git config
+ln -s $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
+# Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
+rm -rf $HOME/.zshrc
+ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
+zsh
+ln -s $HOME/.dotfiles/settings/Spectacle/Shortcuts.json $HOME/Library/Application\ Support/Spectacle/Shortcuts.json
+
+code --install-extension Shan.code-settings-sync
 
 # install ohmyzsh
 if test !$(which ZSH); then
@@ -51,12 +55,4 @@ do_install_font_assets() {
   unset _font_dir
 }
 
-# Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
-rm -rf $HOME/.zshrc
-ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
-
 echo "🚀 its about damn time!"
-
-code --install-extension Shan.code-settings-sync
-
-ln -s $HOME/.dotfiles/settings/Spectacle/Shortcuts.json $HOME/Library/Application\ Support/Spectacle/Shortcuts.json
