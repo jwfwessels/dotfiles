@@ -46,7 +46,7 @@ ln -s $HOME/.dotfiles/settings/Spectacle/Shortcuts.json $HOME/Library/Applicatio
 code --install-extension Shan.code-settings-sync
 
 # install ohmyzsh
-if [[ $(command -v ZSH) == "" ]]; then
+if [[ $(command -v uninstall_oh_my_zsh) == "" ]]; then
     echo "Seems we dont have OH MY ZSH 😱"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
     zsh
