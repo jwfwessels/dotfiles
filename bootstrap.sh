@@ -30,7 +30,6 @@ ln -s $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
 # Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
 rm -rf $HOME/.zshrc
 ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
-zsh
 ln -s $HOME/.dotfiles/settings/Spectacle/Shortcuts.json $HOME/Library/Application\ Support/Spectacle/Shortcuts.json
 
 code --install-extension Shan.code-settings-sync
@@ -39,6 +38,7 @@ code --install-extension Shan.code-settings-sync
 if test !$(which ZSH); then
     echo "Seems we dont have OH MY ZSH 😱"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+    zsh
     git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
     ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
     git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
