@@ -10,10 +10,15 @@ xcode-select --install
 
 
 # Check for Homebrew and install if we don't have it
-if test ! $(which brew); then
+[[ $(command -v brew) == "" ]]; then
     echo "Seems we need some homebrew 🍻"
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    # /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
+
+command -v brew >/dev/null 2>&1 || { echo >&2 "Installing Homebrew Now"; \
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"; }
+@pnbrown
+
 
 # Update Homebrew recipes
 brew update
