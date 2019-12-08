@@ -8,6 +8,11 @@ echo "Setting up your Mac 🛠 🏗"
 echo "Install Apple command line tools..."
 xcode-select --install
 
+echo "clone repo"
+git clone --recursive https://github.com/jwfwessels/dotfiles.git $HOME/.dotfiles
+
+echo "move to repo"
+cd ~/.dotfiles
 # Check for Homebrew and install if we don't have it
 if [[ $(command -v brew) == "" ]]; then
     echo "Seems we need some homebrew 🍻"
@@ -57,5 +62,5 @@ do_install_font_assets() {
 
 echo "last step switch this repo to using ssh 😬"
 cd $HOME/.dotfiles && git remote set-url origin git@github.com:jwfwessels/dotfiles.git
-
+cd $HOME
 echo "🚀 its about damn time!"
