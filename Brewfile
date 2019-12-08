@@ -3,12 +3,28 @@
 # Install command-line tools using Homebrew.
 
 # Tap sources
+# ================
 tap "phinze/cask"
 tap "AdoptOpenJDK/openjdk"
+tap "homebrew/cask-fonts"
 
 
-# Install
+# Install formulas
+# ================
+# install cask forumlas:
+# install custom powerline fonts for dev and terminal
+cask "font-menlo-for-powerline"
+cask "font-fira-mono-for-powerline"
+cask "font-source-code-pro-for-powerline"
+cask "font-powerline-symbols"
+
 cask "iterm2"
+cask "google-chrome"
+cask "visual-studio-code"
+cask "slack"
+cask "spectacle"
+
+# install brew forumlas
 brew "git-flow"
 brew "watchman"
 brew "wget"
