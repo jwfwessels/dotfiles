@@ -55,4 +55,7 @@ do_install_font_assets() {
   unset _font_dir
 }
 
+echo "last step switch this repo to using ssh 😬"
+cd $HOME/.dotfiles && git remote set-url origin git@github.com:jwfwessels/dotfiles.git
+
 echo "🚀 its about damn time!"
