@@ -81,6 +81,10 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+# incase you break your PATH run this:
+# export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:$PATH"
+# vscode
+export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -134,6 +138,7 @@ alias activate="source ve/bin/activate"
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+
 
 alias avd="/Users/jwfwessels/Library/Android/sdk/tools/emulator -avd Nexus_5X_API_23 -netdelay none -netspeed full"
 

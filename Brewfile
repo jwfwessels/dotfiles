@@ -36,4 +36,4 @@ brew "zsh"
 brew "zsh-completions"
 
 # this requires a password so rather do it in the boostrap.sh
-# cask "adoptopenjdk8"
+cask "adoptopenjdk8"

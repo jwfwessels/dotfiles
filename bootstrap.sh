@@ -38,9 +38,8 @@ fi
 
 # update git config
 ln -s $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
-# Removes .zshrc from $HOME (if it exists) and symlinks the .zshrc file from the .dotfiles
-rm -rf $HOME/.zshrc
-ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
+
+rm $HOME/Library/Application\ Support/Spectacle/Shortcuts.json
 ln -s $HOME/.dotfiles/settings/Spectacle/Shortcuts.json $HOME/Library/Application\ Support/Spectacle/Shortcuts.json
 
 code --install-extension Shan.code-settings-sync
@@ -49,12 +48,23 @@ code --install-extension Shan.code-settings-sync
 if [[ $(command -v uninstall_oh_my_zsh) == "" ]]; then
     echo "Seems we dont have OH MY ZSH 😱"
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-    # rm -rf $HOME/.zshrc
-    # ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
+    # Removes .zshrc from $HOME (that OMZ creates erroniously even with unattended flag...) and symlinks the .zshrc file from the .dotfiles
+    rm -rf $HOME/.zshrc
+    ln -s $HOME/.dotfiles/.zshrc $HOME/.zshrc
     source ~/.zshrc
     git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
     ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
     git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
+fi
+
+# set iterm2 settings
+# '==' explained https://www.zsh.org/mla/users/2011/msg00161.html
+if [ $(defaults read com.googlecode.iterm2.plist PrefsCustomFolder) '==' "" ] && [ -d "$HOME/.dotfiles/settings/iterm2" ]; then
+    echo "dotfiles have iterm2 settings point iterm at them 😎"
+    # Specify the preferences directory
+    defaults write com.googlecode.iterm2.plist PrefsCustomFolder -string "~/.dotfiles/settings/iterm2"
+    # Tell iTerm2 to use the custom preferences in the directory
+    defaults write com.googlecode.iterm2.plist LoadPrefsFromCustomFolder -bool true
 fi
 
 echo "last step switch this repo to using ssh 😬"
