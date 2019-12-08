@@ -28,13 +28,13 @@ cd ~/.dotfiles
 if [[ $(command -v brew) == "" ]]; then
     echo "Seems we need some homebrew 🍻"
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    # Update Homebrew recipes
+    brew update
+
+    # install brewfile
+    brew bundle
 fi
 
-# Update Homebrew recipes
-brew update
-
-# install brewfile
-brew bundle
 
 # update git config
 ln -s $HOME/.dotfiles/.gitconfig $HOME/.gitconfig
