@@ -17,6 +17,7 @@ cask "font-menlo-for-powerline"
 cask "font-fira-mono-for-powerline"
 cask "font-source-code-pro-for-powerline"
 cask "font-powerline-symbols"
+cask "font-fira-code"
 
 cask "iterm2"
 cask "google-chrome"
