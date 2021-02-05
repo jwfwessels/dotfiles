@@ -21,6 +21,7 @@ export ZSH="/Users/$USER/.oh-my-zsh"
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="robbyrussell"
 ZSH_THEME="spaceship"
+SPACESHIP_DOCKER_SHOW=false
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -135,10 +136,16 @@ alias dl-course='youtube-dl -a list.txt -o "%(autonumber)s-%(title)s.%(ext)s"'
 alias activate="source ve/bin/activate"
 
 # exports for React Native tools to build native android code
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/platform-tools
+# export PATH="/usr/local/opt/openjdk/bin:$PATH"
 
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export GRADLE_HOME=~/gradle/gradle-6.3/bin
+export PATH=$PATH:$GRADLE_HOME
 
 alias avd="/Users/jwfwessels/Library/Android/sdk/tools/emulator -avd Nexus_5X_API_23 -netdelay none -netspeed full"
 
@@ -201,3 +208,6 @@ nukeBTsettings() {
     sudo rm /Library/Preferences/com.apple.Bluetooth.plist
 }
 
+# Note recently having issues with spotlight and large JS projects. 
+# so followed this https://apple.stackexchange.com/questions/162227/how-to-isolate-processes-that-evoke-insane-mds-stores-disk-read-activity
+# and disabled spotlight indexing of my project directory
