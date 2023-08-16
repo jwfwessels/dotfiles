@@ -28,6 +28,8 @@
   # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushdefault
 
   followTags = true
+	default = current
+	autoSetupRemote = true
   # Because I get sick of telling git to do it manually
   # https://git-scm.com/docs/git-config#Documentation/git-config.txt-pushfollowTags
 
@@ -38,3 +40,19 @@
 
 # [crendential]
 # 	helper = osxkeychain
+
+[url "ssh://git@github.com/"]
+    insteadOf = https://github.com/
+[pull]
+	rebase = true
+[rerere]
+	enabled = true
+[url "git@github.com:framer"]
+	insteadOf = https://github.com/framer
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[init]
+	defaultBranch = main

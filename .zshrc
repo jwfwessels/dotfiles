@@ -1,17 +1,16 @@
 # show all hidden folders
 
-SHOWALLFILES=`defaults read com.apple.finder AppleShowAllFiles`
-if [[ $SHOWALLFILES != 1 ]]; 
-then
-	defaults write com.apple.finder AppleShowAllFiles -boolean true
-	echo "Set show hidden files true, please restart Finder."
+SHOWALLFILES=$(defaults read com.apple.finder AppleShowAllFiles)
+if [[ $SHOWALLFILES != 1 ]]; then
+    defaults write com.apple.finder AppleShowAllFiles -boolean true
+    echo "Set show hidden files true, please restart Finder."
 fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# add homebrew's sbin to path	
- export PATH="/usr/local/sbin:$PATH"
+# add homebrew's sbin to path
+# export PATH="/usr/local/sbin:$PATH"
 
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/$USER/.oh-my-zsh"
@@ -73,10 +72,10 @@ SPACESHIP_DOCKER_SHOW=false
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  zsh-nvm
-  npm
-  git
-#   yarn-autocompletions
+    #   zsh-nvm
+    npm
+    git
+    #   yarn-autocompletions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -177,7 +176,6 @@ alias avd="/Users/jwfwessels/Library/Android/sdk/tools/emulator -avd Nexus_5X_AP
 # alias mysethost=setHost
 # alias mycreatehost=createHost
 
-
 # alias to love
 alias love="/Applications/love.app/Contents/MacOS/love"
 
@@ -208,6 +206,24 @@ nukeBTsettings() {
     sudo rm /Library/Preferences/com.apple.Bluetooth.plist
 }
 
-# Note recently having issues with spotlight and large JS projects. 
+discordVirtualCamFix() {
+    codesign --remove-signature '/Applications/Discord.app/Contents/Frameworks/Discord Helper (Renderer).app/Contents/MacOS/Discord Helper (Renderer)'
+}
+
+# Note recently having issues with spotlight and large JS projects.
 # so followed this https://apple.stackexchange.com/questions/162227/how-to-isolate-processes-that-evoke-insane-mds-stores-disk-read-activity
 # and disabled spotlight indexing of my project directory
+
+export WEB_API_KEY=ENzejjtNgtPT7nNQi93A4TPDbtf8Wz6yM7DyiDiZvLusJgMs
+# Autoload Stratus environment variables
+[ -f "${HOME}/.stratus_env" ] && source "${HOME}/.stratus_env" && export $(grep -v '^#' "${HOME}/.stratus_env" | xargs)
+
+export PATH="/Users/jwwessels/.deno/bin:$PATH"
+
+
+[ -f "${HOME}/.framer_homebrew" ] && source "${HOME}/.framer_homebrew"
+export HOMEBREW_GITHUB_API_TOKEN
+
+# required by n (node) - https://github.com/tj/n
+export N_PREFIX=$HOME/.n
+export PATH=$N_PREFIX/bin:$PATH

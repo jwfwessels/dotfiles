@@ -54,7 +54,7 @@ if [[ $(command -v uninstall_oh_my_zsh) == "" ]]; then
     source ~/.zshrc
     git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt"
     ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
-    git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
+    # git clone https://github.com/lukechilds/zsh-nvm ~/.oh-my-zsh/custom/plugins/zsh-nvm
 fi
 
 # set iterm2 settings
@@ -70,4 +70,4 @@ fi
 echo "last step switch this repo to using ssh 😬"
 cd $HOME/.dotfiles && git remote set-url origin git@github.com:jwfwessels/dotfiles.git
 cd $HOME
-echo "🚀 its about damn time!"
+echo "🚀 it's about damn time!"
